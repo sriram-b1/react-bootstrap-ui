@@ -1,0 +1,27 @@
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+input {
+    min-width: 320px;
+    border: 1px solid #888888;
+    font: 400 14px "Roboto";
+    line-height: 20px;
+    padding: 12px 16px 11px 16px;
+    color: #333333;
+    margin: 4px 0;
+}
+input::placeholder {
+    font: 400 14px "Roboto";
+    line-height: 20px;
+    color: #BBBBBB;
+}
+label {
+    font: 400 14px "Roboto";
+    color: #333333;
+}
+
+small {
+    font: 400 12px "Roboto";
+    color: #666666;
+}
