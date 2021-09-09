@@ -1,34 +1,23 @@
 import React from "react";
-import { useTable } from 'react-table'
+import { useTable, useSortBy, useExpanded } from 'react-table'
 import BTable from 'react-bootstrap/Table';
 
-const DataGrid: any = () => {
-    const data:any = React.useMemo(() =>[
-        {
-            ip: '192.168.0.1',
-            serial: '1234ECG88TGS',
-            model: 'PI-12345672',
-            template: 'ECS EX400',
-            networking: 'DHCP',
-            role: 'Data, Monitor',
-        },
-        {
-            ip: '192.168.0.1',
-            serial: '1234ECG88TGS',
-            model: 'PI-12345672',
-            template: 'ECS EX400',
-            networking: 'DHCP',
-            role: 'Data, Monitor',
-        }
-    ], []);
-    const columns: any = React.useMemo(() => [
-        { accessor: "ip", Header: "IP" },
-        { accessor: "serial", Header: "Serial" },
-        { accessor: "model", Header: "Model" },
-        { accessor: "template", Header: "Template" },
-        { accessor: "networking", Header: "Networking" },
-        { accessor: "role", Header: "Role" },
-    ], []);
+type DataGridProps = {
+    data: { [key: string]: any };
+    column: { [key: string]: any };
+    sorting?: boolean;
+    expandable?: boolean;
+    expandComponent?: any;
+}
+
+const DataGrid: any = (props: DataGridProps) => {
+    console.log("Props: ", props);
+    const data: any = React.useMemo(() =>
+        props.data,
+        []);
+    const columns: any = React.useMemo(() =>
+        props.column,
+        []);
 
     const {
         getTableProps,
@@ -39,8 +28,10 @@ const DataGrid: any = () => {
     } = useTable({
         columns,
         data,
-    })
-    console.log("Header Group: ", headerGroups);
+    },
+        useSortBy,
+        useExpanded,
+    )
     return (
         <BTable {...getTableProps()}>
             <thead>
@@ -48,8 +39,16 @@ const DataGrid: any = () => {
                     <tr {...headerGroup.getHeaderGroupProps()}>
                         {headerGroups.map((grp) => (
                             grp.headers.map((column: any) => (
-                                <th {...column.getHeaderProps()}>
+                                <th {...column.getHeaderProps(props.sorting ? column.getSortByToggleProps() : "")}>
                                     {column.render('Header')}
+                                    <span>
+                                        {column.isSorted
+                                            ? column.isSortedDesc
+                                                ? ' 🔽'
+                                                : ' 🔼'
+                                            : ''
+                                        }
+                                    </span>
                                 </th>
                             ))
                         ))}
@@ -58,20 +57,22 @@ const DataGrid: any = () => {
             </thead>
             <tbody {...getTableBodyProps()}>
                 {rows.map((row: any) => {
-                        prepareRow(row)
-                        console.log("Row: ", row);
-                        return (
-                            <tr {...row.getRowProps()}>
+                    prepareRow(row)
+                    return (
+                        <React.Fragment>
+                            <tr {...row.getRowProps(props.expandable ? row.getToggleRowExpandedProps() : "")}>
                                 {row.cells.map((cell: any) => {
-                                        return (
-                                            <td {...cell.getCellProps()}>
-                                                {cell.render('Cell')}
-                                            </td>
-                                        )
-                                    })}
+                                    return (
+                                        <td {...cell.getCellProps()}>
+                                            {cell.render('Cell')}
+                                        </td>
+                                    )
+                                })}
                             </tr>
-                        )
-                    })}
+                            {row.isExpanded ? <div style={{display: 'flex', flex: 1}}>{props.expandComponent}</div> : ""}
+                        </React.Fragment>
+                    )
+                })}
             </tbody>
         </BTable>
     )

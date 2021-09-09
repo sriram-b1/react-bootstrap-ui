@@ -1,48 +1,15 @@
 @import "../../App.scss";
 
-th {
-    text-align: left;
-    border-left: 2px solid $gray-300;
-    border-bottom: 2px solid $gray-300;
-    padding: 15px 5px;
-    min-height: 60px;
-    &:first-child {
-        border-left: unset;
-    }
-    
-}
-td {
-    padding: 15px 5px;
-}
-table {
-    width: 100%;
-    border: 2px solid $gray-300;
-    border-spacing: unset;
-    font-family: "Roboto";
-}
-table > thead {
-    margin: unset;
+
+.table > tbody {
+    border: 1px solid $gray-300;
 }
 
-.table-footer {
-    font-family: "Roboto";
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 5px;
-    font-weight: bold;
-    border: 2px solid $gray-300;
-    border-top: unset;
+.table > :not(:last-child) > :last-child > * {
+    border: 1px solid $gray-300;
 }
 
-.popover {
-    font-family: "roboto";
-    background-color: $white;
-    border-radius: 5px;
-    border: 1px solid $gray-100;
-}
-
-.checkbox-form {
-    input {
-        min-width: 75px;
-    }
+.table > :not(caption) > * > * {
+    border-bottom: unset;
+    border-top: 1px solid $gray-300;
 }
