@@ -1,0 +1,39 @@
+@import "../../App.scss";
+
+.btn {
+    border-radius: unset;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: $blue-600;
+    border-color: $blue-600;
+}
+
+.btn-outline-primary {
+    background-color: $white;
+    color: $blue-600;
+    border: 1px solid $blue-600;
+}
+
+.btn-success {
+    background-color: $green-400;
+    border-color: $green-400;
+}
+
+.btn-warning {
+    background-color: $yellow-300;
+    border-color: $yellow-300;
+}
+
+.btn-danger {
+    background-color: $red-700;
+    border-color: $red-700;
+}
+
+.btn-light {
+    background-color: $white;
+    color: $blue-600;
+    border: unset;   
+}

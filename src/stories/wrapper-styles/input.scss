@@ -1,0 +1,19 @@
+@import "../../App";
+
+.form-control {
+    border: 1px solid $gray-550;
+    border-radius: unset;
+    color: $gray-900;
+}
+
+.form-control::placeholder {
+    color: $gray-450;
+}
+
+.text-error {
+    color: $red-700;
+}
+
+.form-control-error {
+    border: 1px solid $red-700;
+}

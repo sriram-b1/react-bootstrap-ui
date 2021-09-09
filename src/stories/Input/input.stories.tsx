@@ -1,21 +1,20 @@
 
 import {storiesOf} from "@storybook/react";
 import {action} from "@storybook/addon-actions";
-import Input from './input'
+import { Form } from "react-bootstrap";
+import '../wrapper-styles/index.scss'
 
 storiesOf("Input", module)
-    .add("Sample Input", () => (
-        <div>
-            <Input name="SampleInput" placeholder="sriram_b1@dell.com" label="Email" onChange={action("Changed")}></Input>
-        </div>
-    ))
-    .add("Helper Text", () => (
-        <div>
-            <Input name="SampleInput" placeholder="sriram_b1@dell.com" label="Email" helperText="Typer in your email" onChange={action("Changed")}></Input>
-        </div>
-    ))
-    .add("Error", () => (
-        <div>
-            <Input name="SampleInput" placeholder="sriram_b1@dell.com" label="Email" error errorHelperText="Invalid Email" helperText="Typer in your email" onChange={action("Changed")}></Input>
-        </div>
+    .add("Normal Input", () => (
+        <Form>
+            <div style={{display: "flex", alignItems: "center"}}>
+                <Form.Label style={{flex: 0.5}}>Email address</Form.Label>
+                <div style={{flex: 3}}>
+                    <Form.Control placeholder="sriram_b1@dell.com"></Form.Control>
+                    <Form.Text>
+                        Enter your email address
+                    </Form.Text>
+                </div>
+            </div>
+        </Form>
     ))
