@@ -1,6 +1,8 @@
 @import "../../App.scss";
 
-
+.table {
+    margin-bottom: unset;
+}
 .table > tbody {
     border: 1px solid $gray-300;
 }
@@ -12,4 +14,21 @@
 .table > :not(caption) > * > * {
     border-bottom: unset;
     border-top: 1px solid $gray-300;
+}
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    border: 1px solid $gray-300;
+    border-top: unset;
+}
+.pagination {
+    * {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }

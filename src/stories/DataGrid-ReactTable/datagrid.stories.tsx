@@ -29,6 +29,177 @@ const data = [
     }
 ];
 
+const hugeData = [
+    {
+        ip: '192.168.0.1',
+        serial: '1234ECG88TGS',
+        model: 'PI-12345672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.1',
+        serial: '1234ECG88TGS',
+        model: 'PI-12345672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.2',
+        serial: '678ECG88TGS',
+        model: 'PI-56789672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.1',
+        serial: '1234ECG88TGS',
+        model: 'PI-12345672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.1',
+        serial: '1234ECG88TGS',
+        model: 'PI-12345672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.2',
+        serial: '678ECG88TGS',
+        model: 'PI-56789672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.1',
+        serial: '1234ECG88TGS',
+        model: 'PI-12345672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.1',
+        serial: '1234ECG88TGS',
+        model: 'PI-12345672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.2',
+        serial: '678ECG88TGS',
+        model: 'PI-56789672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.1',
+        serial: '1234ECG88TGS',
+        model: 'PI-12345672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.1',
+        serial: '1234ECG88TGS',
+        model: 'PI-12345672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.2',
+        serial: '678ECG88TGS',
+        model: 'PI-56789672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.1',
+        serial: '1234ECG88TGS',
+        model: 'PI-12345672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.1',
+        serial: '1234ECG88TGS',
+        model: 'PI-12345672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.2',
+        serial: '678ECG88TGS',
+        model: 'PI-56789672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.1',
+        serial: '1234ECG88TGS',
+        model: 'PI-12345672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.1',
+        serial: '1234ECG88TGS',
+        model: 'PI-12345672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.2',
+        serial: '678ECG88TGS',
+        model: 'PI-56789672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.1',
+        serial: '1234ECG88TGS',
+        model: 'PI-12345672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.1',
+        serial: '1234ECG88TGS',
+        model: 'PI-12345672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    },
+    {
+        ip: '192.168.0.2',
+        serial: '678ECG88TGS',
+        model: 'PI-56789672',
+        template: 'ECS EX400',
+        networking: 'DHCP',
+        role: 'Data, Monitor',
+    }
+]
+
 const columns = [
     { accessor: "ip", Header: "IP" },
     { accessor: "serial", Header: "Serial" },
@@ -81,6 +252,15 @@ storiesOf("Data Grid - ReactTable", module)
             <DataGrid
                 data={data}
                 column={columns}
+            ></DataGrid>
+        </div>
+    ))
+    .add("Pagination", () => (
+        <div>
+            <DataGrid
+                data={hugeData}
+                column={columns}
+                pagination
             ></DataGrid>
         </div>
     ))

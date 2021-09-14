@@ -6,6 +6,11 @@
     font-weight: 500;
 }
 
+// To unset the box shadow on focused button / dropdowns
+.btn:active, .btn:focus {
+    box-shadow: unset;
+}
+
 .btn-primary {
     background-color: $blue-600;
     border-color: $blue-600;
