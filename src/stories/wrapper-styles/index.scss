@@ -4,3 +4,14 @@
 @import './cards.scss';
 @import './datagrid.scss';
 @import './input.scss';
+
+* {
+    font-family: "Roboto";
+}
+
+figure {
+    margin: unset;
+}
+img {
+    width: 100%;
+}

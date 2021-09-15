@@ -8,12 +8,9 @@ storiesOf("Input", module)
     .add("Normal Input", () => (
         <Form>
             <div style={{display: "flex", alignItems: "center"}}>
-                <Form.Label style={{flex: 0.5}}>Email address</Form.Label>
-                <div style={{flex: 3}}>
+                <Form.Label style={{marginRight: '20px'}}>Email address</Form.Label>
+                <div>
                     <Form.Control placeholder="sriram_b1@dell.com"></Form.Control>
-                    <Form.Text>
-                        Enter your email address
-                    </Form.Text>
                 </div>
             </div>
         </Form>

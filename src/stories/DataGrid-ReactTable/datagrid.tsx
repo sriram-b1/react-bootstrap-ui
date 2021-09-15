@@ -1,12 +1,14 @@
 import React, { useRef } from "react";
 import { useTable, useSortBy, useExpanded, usePagination } from 'react-table'
-import BTable from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button'
 import { Dropdown, DropdownButton, Form } from "react-bootstrap";
 
 import '../wrapper-styles/index.scss'
 
-import menuIcon from '../../assets/images/menu-icon.png'
+import menuIcon from '../../assets/images/menu-icon.png';
+import sortDesc from '../../assets/images/sort-descending.png';
+import sortAsc from '../../assets/images/sort-ascending.png';
+import columnPicker from '../../assets/images/column-picker.png';
 
 type DataGridProps = {
     data: { [key: string]: any };
@@ -40,6 +42,9 @@ const DataGrid: any = (props: DataGridProps) => {
         nextPage,
         previousPage,
         setPageSize,
+        allColumns,
+        getToggleHideAllColumnsProps,
+        toggleHideAllColumns,
         state: { pageIndex, pageSize },
     } = useTable({
         columns,
@@ -50,25 +55,27 @@ const DataGrid: any = (props: DataGridProps) => {
         useExpanded,
         usePagination
     )
-    const renderRow = props.pagination?page:rows;
+    const renderRow = props.pagination ? page : rows;
     const renderTable = () => {
         return (
-            <BTable {...getTableProps()}>
+            <table {...getTableProps()}>
                 <thead>
                     {headerGroups.map((headerGroup: any) => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroups.map((grp: any) => (
                                 grp.headers.map((column: any) => (
                                     <th {...column.getHeaderProps(props.sorting ? column.getSortByToggleProps() : "")}>
-                                        {column.render('Header')}
-                                        <span>
-                                            {column.isSorted
-                                                ? column.isSortedDesc
-                                                    ? ' 🔽'
-                                                    : ' 🔼'
-                                                : ''
-                                            }
-                                        </span>
+                                        <div className="header-cell">
+                                            {column.render('Header')}
+                                            <span className="column-sorting">
+                                                {column.isSorted
+                                                    ? column.isSortedDesc
+                                                        ? <figure className="sorting-icons"><img src={sortDesc} alt="descending sort" /></figure>
+                                                        : <figure className="sorting-icons"><img src={sortAsc} alt="ascending sort" /></figure>
+                                                    : ''
+                                                }
+                                            </span>
+                                        </div>
                                     </th>
                                 ))
                             ))}
@@ -80,7 +87,7 @@ const DataGrid: any = (props: DataGridProps) => {
                         prepareRow(row)
                         return (
                             <React.Fragment>
-                                <tr {...row.getRowProps(props.expandable ? row.getToggleRowExpandedProps() : "")}>
+                                <tr className="table-row" {...row.getRowProps(props.expandable ? row.getToggleRowExpandedProps() : "")}>
                                     {row.cells.map((cell: any) => {
                                         return (
                                             <td {...cell.getCellProps()}>
@@ -89,18 +96,22 @@ const DataGrid: any = (props: DataGridProps) => {
                                         )
                                     })}
                                 </tr>
-                                {row.isExpanded ? <div style={{ display: 'flex', flex: 1 }}>{props.expandComponent}</div> : ""}
+                                {row.isExpanded ? <tr><td colSpan={allColumns.length}>{props.expandComponent}</td></tr> : ""}
                             </React.Fragment>
                         )
                     })}
                 </tbody>
-            </BTable>
+                <tfoot>
+                    <tr className="footer-row"><td colSpan={allColumns.length}>{renderFooter()}</td></tr>
+                </tfoot>
+            </table>
         )
     }
 
     const renderFooter = () => {
-        return(
+        return (
             <div className="footer">
+                {renderColumnSelect()}
                 {props.pagination
                     ? renderPagination()
                     : renderItemCount()
@@ -112,17 +123,17 @@ const DataGrid: any = (props: DataGridProps) => {
     const renderPagination = () => {
         return (
             <div className="pagination">
-                        <DropdownButton title={pageSize} variant="outline-primary">
-                            <Dropdown.Item onClick={() => setPageSize(5)}>5</Dropdown.Item>
-                            <Dropdown.Item onClick={() => setPageSize(10)}>10</Dropdown.Item>
-                        </DropdownButton>
-                        <p>Showing {pageIndex * pageSize + 1} - {(pageIndex + 1) * pageSize < data.length ? (pageIndex + 1) * pageSize : data.length} of {data.length}</p>
-                        <Button variant="light" onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{'|<'}</Button>
-                        <Button variant="light" onClick={previousPage} disabled={!canPreviousPage}>{'<'}</Button>
-                        <span>{pageIndex + 1} / {pageCount}</span>
-                        <Button variant="light" onClick={nextPage} disabled={!canNextPage}>{'>'}</Button>
-                        <Button variant="light" onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>|'}</Button>
-                    </div>
+                <DropdownButton title={pageSize} variant="outline-primary">
+                    <Dropdown.Item onClick={() => setPageSize(5)}>5</Dropdown.Item>
+                    <Dropdown.Item onClick={() => setPageSize(10)}>10</Dropdown.Item>
+                </DropdownButton>
+                <p>Showing {pageIndex * pageSize + 1} - {(pageIndex + 1) * pageSize < data.length ? (pageIndex + 1) * pageSize : data.length} of {data.length}</p>
+                <Button variant="light" onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{'|<'}</Button>
+                <Button variant="light" onClick={previousPage} disabled={!canPreviousPage}>{'<'}</Button>
+                <span>{pageIndex + 1} / {pageCount}</span>
+                <Button variant="light" onClick={nextPage} disabled={!canNextPage}>{'>'}</Button>
+                <Button variant="light" onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>|'}</Button>
+            </div>
         )
     }
     const renderItemCount = () => {
@@ -135,13 +146,23 @@ const DataGrid: any = (props: DataGridProps) => {
 
     const renderColumnSelect = () => {
         return (
-            <div>
+            <div className="column-select">
                 <Dropdown>
                     <Dropdown.Toggle>
-                        <img src={menuIcon} alt="menu icon"></img>
+                        <figure className="column-picker-icon">
+                            <img src={columnPicker} alt="Column picker"></img>
+                        </figure>
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                        <h2>Hello World!</h2>
+                        {allColumns.map((column: any) => (
+                            <div key={column.id}>
+                                <label>
+                                    <input type="checkbox" {...column.getToggleHiddenProps()} />{' '}
+                                    {column.id}
+                                </label>
+                            </div>
+                        ))}
+                        <Button variant="light" onClick={() => toggleHideAllColumns(false)}>Select All</Button>
                     </Dropdown.Menu>
                 </Dropdown>
             </div>
@@ -151,7 +172,6 @@ const DataGrid: any = (props: DataGridProps) => {
     return (
         <div>
             {renderTable()}
-            {renderFooter()}
         </div>
     )
 }
