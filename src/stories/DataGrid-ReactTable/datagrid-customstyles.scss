@@ -1,0 +1,62 @@
+@import '../../App.scss';
+
+$table-border: 1px solid $gray-300;
+
+.expanded-row {
+    border-top: unset;
+}
+.header-cell {
+    display: flex;
+    font-family: inherit;
+    .column-sorting {
+        padding: 0 10px;
+    }
+}
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: unset;
+}
+.pagination {
+    * {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    p {
+        margin-bottom: unset;
+    }
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+
+.column-select {
+    // making the button color to transparent
+    .btn-primary, .btn-primary:focus, .btn-primary:hover, .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
+        background-color: transparent;
+        border: unset;
+    }
+    // removing the focus box shadow
+    .btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
+        box-shadow: unset;
+    }
+    .dropdown-menu.show {
+        padding: 10px;
+    }
+    // To remove drop down icon as it is not required in this case
+    .dropdown-toggle::after {
+        content: none;
+    }
+}
+
+
+// Icon styles
+.column-picker-icon {
+    max-width: 20px;
+    max-height: 20px;
+}
+.sorting-icons {
+    max-width: 8px;
+}

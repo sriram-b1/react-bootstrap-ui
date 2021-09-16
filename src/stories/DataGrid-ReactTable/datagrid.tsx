@@ -3,11 +3,11 @@ import { useTable, useSortBy, useExpanded, usePagination } from 'react-table'
 import Button from 'react-bootstrap/Button'
 import { Dropdown, DropdownButton, Form } from "react-bootstrap";
 
-import '../wrapper-styles/index.scss'
+import '../wrapper-styles/index.scss';
+import './datagrid-customstyles.scss';
 
-import menuIcon from '../../assets/images/menu-icon.png';
-import sortDesc from '../../assets/images/sort-descending.png';
-import sortAsc from '../../assets/images/sort-ascending.png';
+import sortDesc from '../../assets/images/chevron-down.png';
+import sortAsc from '../../assets/images/chevron-up.png';
 import columnPicker from '../../assets/images/column-picker.png';
 
 type DataGridProps = {
@@ -87,7 +87,7 @@ const DataGrid: any = (props: DataGridProps) => {
                         prepareRow(row)
                         return (
                             <React.Fragment>
-                                <tr className="table-row" {...row.getRowProps(props.expandable ? row.getToggleRowExpandedProps() : "")}>
+                                <tr {...row.getRowProps(props.expandable ? row.getToggleRowExpandedProps() : "")}>
                                     {row.cells.map((cell: any) => {
                                         return (
                                             <td {...cell.getCellProps()}>
@@ -96,7 +96,7 @@ const DataGrid: any = (props: DataGridProps) => {
                                         )
                                     })}
                                 </tr>
-                                {row.isExpanded ? <tr><td colSpan={allColumns.length}>{props.expandComponent}</td></tr> : ""}
+                                {row.isExpanded ? <tr className="expanded-row"><td colSpan={allColumns.length}>{props.expandComponent}</td></tr> : ""}
                             </React.Fragment>
                         )
                     })}

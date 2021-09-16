@@ -5,6 +5,7 @@ $table-border: 1px solid $gray-300;
 table {
     width: 100%;
     flex: 1;
+    border: $table-border;
 }
 thead {
     border: $table-border;
@@ -13,86 +14,41 @@ thead {
 tbody {
     border: $table-border;
 }
-.table-row {
+
+tr {
     border-top: $table-border;
-}
-.footer-row {
-    border: $table-border;
-}
-th {
-    position: relative;
-    ::after {
-        content: "|";
-        position: absolute;
-        right: 0;
-        color: $gray-300;
-        font-weight: 50;
-    }
 }
 
 th {
+    position: relative;
+    font-size: 14px;
+    font-weight: 500;
+    color: $gray-900;
+    font-family: $roboto-medium;
+    height: 55px;
+    ::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 16px;
+        bottom: 14px;
+        color: transparent;
+        border-right: $table-border;
+    }
     &:last-child{
         ::after {
             content: "";
+            border: unset;
         }
     }
 }
+
 td, th {
     padding: 10px;
 }
-
-.header-cell {
-    display: flex;
-    .column-sorting {
-        padding: 0 10px;
-    }
+td {
+    font-size: 14px;
+    font-weight: 400;
+    color: $gray-900;
 }
 
-.footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: unset;
-}
-.pagination {
-    * {
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-    p {
-        margin-bottom: unset;
-    }
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.column-select {
-    // making the button color to transparent
-    .btn-primary, .btn-primary:focus, .btn-primary:hover, .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
-        background-color: transparent;
-        border: unset;
-    }
-    // removing the focus box shadow
-    .btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
-        box-shadow: unset;
-    }
-    .dropdown-menu.show {
-        padding: 10px;
-    }
-    // To remove drop down icon as it is not required in this case
-    .dropdown-toggle::after {
-        content: none;
-    }
-}
-
-
-// Icon styles
-.column-picker-icon {
-    max-width: 20px;
-    max-height: 20px;
-}
-.sorting-icons {
-    max-width: 16px;
-    max-height: 16px;
-}

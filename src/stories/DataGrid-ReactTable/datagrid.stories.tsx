@@ -1,6 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import DataGrid from './datagrid'
+import KeyValue from '../../components/KeyValueComponent/keyvalue';
 
 const data = [
     {
@@ -208,12 +209,6 @@ const columns = [
     { accessor: "networking", Header: "Networking" },
     { accessor: "role", Header: "Role" },
 ];
-const expandable = (
-    <div>
-        <h1>Hello World!</h1>
-        <p>This is an expandable component</p>
-    </div>
-)
 
 
 storiesOf("Data Grid - ReactTable", module)
@@ -224,7 +219,7 @@ storiesOf("Data Grid - ReactTable", module)
                 column={columns}
                 sorting
                 expandable
-                expandComponent={expandable}
+                expandComponent={<KeyValue></KeyValue>}
             ></DataGrid>
         </div>
     ))
@@ -243,7 +238,7 @@ storiesOf("Data Grid - ReactTable", module)
                 data={data}
                 column={columns}
                 expandable
-                expandComponent={expandable}
+                expandComponent={<KeyValue></KeyValue>}
             ></DataGrid>
         </div>
     ))
