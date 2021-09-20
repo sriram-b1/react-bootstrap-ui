@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTable, useSortBy, useExpanded, usePagination } from 'react-table'
 import Button from 'react-bootstrap/Button'
-import { Dropdown, DropdownButton, Form } from "react-bootstrap";
+import { Dropdown, DropdownButton, Form, Spinner } from "react-bootstrap";
 
 import '../wrapper-styles/index.scss';
 import './datagrid-customstyles.scss';
@@ -9,6 +9,7 @@ import './datagrid-customstyles.scss';
 import sortDesc from '../../assets/images/chevron-down.png';
 import sortAsc from '../../assets/images/chevron-up.png';
 import columnPicker from '../../assets/images/column-picker.png';
+import { DebounceUtils } from "../../utils/debounceUtils";
 
 type DataGridProps = {
     data: { [key: string]: any };
@@ -17,9 +18,18 @@ type DataGridProps = {
     expandable?: boolean;
     expandComponent?: any;
     pagination?: boolean;
+    columnSelect?:boolean;
 }
 
+
 const DataGrid: any = (props: DataGridProps) => {
+    const pageRef = useRef(null);
+    const [isLoading,setLoading] = useState(false);
+    const debounceHandleChange = new DebounceUtils();
+    enum Navigate {
+        PREVIOUS = 'previous',
+        NEXT = 'next'
+    }
     const data: any = React.useMemo(() =>
         props.data,
         []);
@@ -56,6 +66,44 @@ const DataGrid: any = (props: DataGridProps) => {
         usePagination
     )
     const renderRow = props.pagination ? page : rows;
+
+    useEffect(() => {
+        if(props.pagination){
+            pageRef.current!.value = pageIndex + 1;
+        }
+    }, [pageIndex])
+
+
+    //Page Functions
+    const onPageChange = (event: any) => {
+        setLoading(true);
+        const pageInput = Number(event.target.value);
+        if(isNaN(pageInput)){
+            pageRef.current!.value = pageIndex + 1;
+        } else {
+            let nextPage:number = pageIndex;
+            if(pageInput<1) {
+                nextPage = 0;
+            } else if(pageInput > pageCount) {
+                nextPage = pageCount - 1;
+            } else {
+                nextPage = pageInput - 1;
+            }
+            gotoPage(nextPage);
+        }
+        setLoading(false)
+    }
+
+    const onPageNavigation = async (type: Navigate) => {
+        if(type===Navigate.PREVIOUS) {
+            await previousPage();
+        } else if(type===Navigate.NEXT) {
+            await nextPage();
+        }
+        pageRef.current!.value = pageIndex + 1;
+    }
+
+    // Render functions
     const renderTable = () => {
         return (
             <table {...getTableProps()}>
@@ -82,7 +130,7 @@ const DataGrid: any = (props: DataGridProps) => {
                         </tr>
                     ))}
                 </thead>
-                <tbody {...getTableBodyProps()}>
+                <tbody {...getTableBodyProps()} className="table-body">
                     {renderRow.map((row: any) => {
                         prepareRow(row)
                         return (
@@ -100,6 +148,9 @@ const DataGrid: any = (props: DataGridProps) => {
                             </React.Fragment>
                         )
                     })}
+                    {isLoading?<div className="spinner">
+                        <Spinner animation="border" variant="primary" />
+                    </div>:null}
                 </tbody>
                 <tfoot>
                     <tr className="footer-row"><td colSpan={allColumns.length}>{renderFooter()}</td></tr>
@@ -111,7 +162,7 @@ const DataGrid: any = (props: DataGridProps) => {
     const renderFooter = () => {
         return (
             <div className="footer">
-                {renderColumnSelect()}
+                {props.columnSelect?renderColumnSelect():null}
                 {props.pagination
                     ? renderPagination()
                     : renderItemCount()
@@ -123,22 +174,37 @@ const DataGrid: any = (props: DataGridProps) => {
     const renderPagination = () => {
         return (
             <div className="pagination">
-                <DropdownButton title={pageSize} variant="outline-primary">
-                    <Dropdown.Item onClick={() => setPageSize(5)}>5</Dropdown.Item>
-                    <Dropdown.Item onClick={() => setPageSize(10)}>10</Dropdown.Item>
-                </DropdownButton>
-                <p>Showing {pageIndex * pageSize + 1} - {(pageIndex + 1) * pageSize < data.length ? (pageIndex + 1) * pageSize : data.length} of {data.length}</p>
-                <Button variant="light" onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{'|<'}</Button>
-                <Button variant="light" onClick={previousPage} disabled={!canPreviousPage}>{'<'}</Button>
-                <span>{pageIndex + 1} / {pageCount}</span>
-                <Button variant="light" onClick={nextPage} disabled={!canNextPage}>{'>'}</Button>
-                <Button variant="light" onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>|'}</Button>
+                <div>
+                    <p>{data.length} items found. Displaying items {pageIndex * pageSize + 1} - {(pageIndex + 1) * pageSize < data.length ? (pageIndex + 1) * pageSize : data.length}.</p>
+                </div>
+                <div className="page-selection-container">
+                    <p>Rows per page:</p>
+                    <DropdownButton title={pageSize} variant="outline-primary">
+                        <Dropdown.Item onClick={() => setPageSize(5)}>5</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setPageSize(10)}>10</Dropdown.Item>
+                    </DropdownButton>
+                    <Button variant="light" onClick={() => onPageNavigation(Navigate.PREVIOUS)} disabled={!canPreviousPage}>{'<'}</Button>
+                    <span>
+                        <Form.Control
+                            ref={pageRef}
+                            defaultValue={pageIndex + 1}
+                            onChange={(evt) => debounceHandleChange.debounce(evt, onPageChange, true)}
+                            onBlur={onPageChange}
+                            min={0}
+                            max={pageCount}
+                        ></Form.Control>
+                    </span>
+                    <span>&nbsp; of {pageCount}</span>
+                    <Button variant="light" onClick={() => onPageNavigation(Navigate.NEXT)} disabled={!canNextPage}>{'>'}</Button>
+                </div>
             </div>
         )
     }
+
+    
     const renderItemCount = () => {
         return (
-            <div className="pagination">
+            <div className="record-count">
                 <span>{data.length} Total</span>
             </div>
         )

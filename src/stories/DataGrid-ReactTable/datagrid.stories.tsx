@@ -2,6 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import DataGrid from './datagrid'
 import KeyValue from '../../components/KeyValueComponent/keyvalue';
+import { DATA } from "./datagrid-data";
 
 const data = [
     {
@@ -212,21 +213,18 @@ const columns = [
 
 
 storiesOf("Data Grid - ReactTable", module)
-    .add("Sorting & Expansion", () => (
+    .add("Normal Table", () => (
         <div>
             <DataGrid
-                data={data}
+                data={DATA.data}
                 column={columns}
-                sorting
-                expandable
-                expandComponent={<KeyValue></KeyValue>}
             ></DataGrid>
         </div>
     ))
     .add("Sorting", () => (
         <div>
             <DataGrid
-                data={data}
+                data={DATA.data}
                 column={columns}
                 sorting
             ></DataGrid>
@@ -235,27 +233,36 @@ storiesOf("Data Grid - ReactTable", module)
     .add("Expansion", () => (
         <div>
             <DataGrid
-                data={data}
+                data={DATA.data}
                 column={columns}
                 expandable
                 expandComponent={<KeyValue></KeyValue>}
             ></DataGrid>
         </div>
     ))
-    .add("Normal Table", () => (
+    .add("Column selection", () => (
         <div>
             <DataGrid
-                data={data}
+                data={DATA.data}
                 column={columns}
+                columnSelect
             ></DataGrid>
         </div>
     ))
     .add("Pagination", () => (
         <div>
             <DataGrid
-                data={hugeData}
+                data={DATA.hugeData}
                 column={columns}
                 pagination
+            ></DataGrid>
+        </div>
+    ))
+    .add("Virtual Row - React Window", () => (
+        <div>
+            <DataGrid
+                data={DATA.hugeData}
+                column={columns}
             ></DataGrid>
         </div>
     ))
