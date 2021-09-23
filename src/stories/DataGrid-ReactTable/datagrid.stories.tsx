@@ -263,6 +263,7 @@ storiesOf("Data Grid - ReactTable", module)
             <DataGrid
                 data={DATA.hugeData}
                 column={columns}
+                infiniteScroll
             ></DataGrid>
         </div>
     ))

@@ -2,7 +2,7 @@
 import {storiesOf} from "@storybook/react";
 import {action} from "@storybook/addon-actions";
 import { Form } from "react-bootstrap";
-import '../wrapper-styles/index.scss'
+import '../../wrapper-styles/index.scss'
 
 storiesOf("Input", module)
     .add("Normal Input", () => (

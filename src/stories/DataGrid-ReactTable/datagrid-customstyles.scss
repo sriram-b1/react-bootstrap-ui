@@ -47,6 +47,9 @@ $table-border: 1px solid $gray-300;
         * {
             padding: 0 10px;
         }
+        .dropdown-menu.show {
+            padding: unset;
+        }
         span {
             padding: unset;
         }
@@ -78,9 +81,6 @@ $table-border: 1px solid $gray-300;
     .btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
         box-shadow: unset;
     }
-    .dropdown-menu.show {
-        padding: 10px;
-    }
     // To remove drop down icon as it is not required in this case
     .dropdown-toggle::after {
         content: none;
@@ -95,4 +95,5 @@ $table-border: 1px solid $gray-300;
 }
 .sorting-icons {
     max-width: 8px;
+    line-height: 20px;
 }

@@ -3,7 +3,7 @@ import {storiesOf} from "@storybook/react";
 import {action} from "@storybook/addon-actions";
 import { Button } from 'react-bootstrap';
 
-import '../wrapper-styles/index.scss'
+import '../../wrapper-styles/index.scss'
 
 storiesOf("Button", module)
     .add("Primary", () => (

@@ -1,15 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useTable, useSortBy, useExpanded, usePagination } from 'react-table'
+import { useTable, useSortBy, useExpanded, usePagination, useBlockLayout } from 'react-table'
 import Button from 'react-bootstrap/Button'
 import { Dropdown, DropdownButton, Form, Spinner } from "react-bootstrap";
 
-import '../wrapper-styles/index.scss';
+import '../../wrapper-styles/index.scss';
 import './datagrid-customstyles.scss';
 
 import sortDesc from '../../assets/images/chevron-down.png';
 import sortAsc from '../../assets/images/chevron-up.png';
 import columnPicker from '../../assets/images/column-picker.png';
 import { DebounceUtils } from "../../utils/debounceUtils";
+
+import { FixedSizeList } from 'react-window'
 
 type DataGridProps = {
     data: { [key: string]: any };
@@ -18,14 +20,16 @@ type DataGridProps = {
     expandable?: boolean;
     expandComponent?: any;
     pagination?: boolean;
-    columnSelect?:boolean;
+    columnSelect?: boolean;
+    infiniteScroll?: boolean;
 }
 
 
 const DataGrid: any = (props: DataGridProps) => {
     const pageRef = useRef(null);
-    const [isLoading,setLoading] = useState(false);
+    const [isLoading, setLoading] = useState(false);
     const debounceHandleChange = new DebounceUtils();
+    const scrollBarWidth = 20;
     enum Navigate {
         PREVIOUS = 'previous',
         NEXT = 'next'
@@ -36,6 +40,8 @@ const DataGrid: any = (props: DataGridProps) => {
     const columns: any = React.useMemo(() =>
         props.column,
         []);
+
+    const scrollBarSize = React.useMemo(() => scrollBarWidth, [])
 
     const {
         getTableProps,
@@ -56,6 +62,7 @@ const DataGrid: any = (props: DataGridProps) => {
         getToggleHideAllColumnsProps,
         toggleHideAllColumns,
         state: { pageIndex, pageSize },
+        totalColumnsWidth,
     } = useTable({
         columns,
         data,
@@ -63,12 +70,13 @@ const DataGrid: any = (props: DataGridProps) => {
     },
         useSortBy,
         useExpanded,
-        usePagination
+        usePagination,
+        props.infiniteScroll ? useBlockLayout : '',
     )
     const renderRow = props.pagination ? page : rows;
 
     useEffect(() => {
-        if(props.pagination){
+        if (props.pagination) {
             pageRef.current!.value = pageIndex + 1;
         }
     }, [pageIndex])
@@ -78,13 +86,13 @@ const DataGrid: any = (props: DataGridProps) => {
     const onPageChange = (event: any) => {
         setLoading(true);
         const pageInput = Number(event.target.value);
-        if(isNaN(pageInput)){
+        if (isNaN(pageInput)) {
             pageRef.current!.value = pageIndex + 1;
         } else {
-            let nextPage:number = pageIndex;
-            if(pageInput<1) {
+            let nextPage: number = pageIndex;
+            if (pageInput < 1) {
                 nextPage = 0;
-            } else if(pageInput > pageCount) {
+            } else if (pageInput > pageCount) {
                 nextPage = pageCount - 1;
             } else {
                 nextPage = pageInput - 1;
@@ -95,9 +103,9 @@ const DataGrid: any = (props: DataGridProps) => {
     }
 
     const onPageNavigation = async (type: Navigate) => {
-        if(type===Navigate.PREVIOUS) {
+        if (type === Navigate.PREVIOUS) {
             await previousPage();
-        } else if(type===Navigate.NEXT) {
+        } else if (type === Navigate.NEXT) {
             await nextPage();
         }
         pageRef.current!.value = pageIndex + 1;
@@ -106,7 +114,7 @@ const DataGrid: any = (props: DataGridProps) => {
     // Render functions
     const renderTable = () => {
         return (
-            <table {...getTableProps()}>
+            <table {...getTableProps()} style={props.infiniteScroll?{width: totalColumnsWidth}:null}>
                 <thead>
                     {headerGroups.map((headerGroup: any) => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
@@ -118,8 +126,8 @@ const DataGrid: any = (props: DataGridProps) => {
                                             <span className="column-sorting">
                                                 {column.isSorted
                                                     ? column.isSortedDesc
-                                                        ? <figure className="sorting-icons"><img src={sortDesc} alt="descending sort" /></figure>
-                                                        : <figure className="sorting-icons"><img src={sortAsc} alt="ascending sort" /></figure>
+                                                        ? <div className="sorting-icons"><img src={sortDesc} alt="descending sort" /></div>
+                                                        : <div className="sorting-icons"><img src={sortAsc} alt="ascending sort" /></div>
                                                     : ''
                                                 }
                                             </span>
@@ -131,26 +139,37 @@ const DataGrid: any = (props: DataGridProps) => {
                     ))}
                 </thead>
                 <tbody {...getTableBodyProps()} className="table-body">
-                    {renderRow.map((row: any) => {
-                        prepareRow(row)
-                        return (
-                            <React.Fragment>
-                                <tr {...row.getRowProps(props.expandable ? row.getToggleRowExpandedProps() : "")}>
-                                    {row.cells.map((cell: any) => {
-                                        return (
-                                            <td {...cell.getCellProps()}>
-                                                {cell.render('Cell')}
-                                            </td>
-                                        )
-                                    })}
-                                </tr>
-                                {row.isExpanded ? <tr className="expanded-row"><td colSpan={allColumns.length}>{props.expandComponent}</td></tr> : ""}
-                            </React.Fragment>
+                    {props.infiniteScroll
+                        ? (
+                            <FixedSizeList
+                                height={550}
+                                itemCount={rows.length}
+                                itemSize={35}
+                                width={totalColumnsWidth + scrollBarSize}
+                            >
+                                {renderVirtualRow}
+                            </FixedSizeList>
                         )
-                    })}
-                    {isLoading?<div className="spinner">
+                        : renderRow.map((row: any) => {
+                            prepareRow(row)
+                            return (
+                                <React.Fragment>
+                                    <tr {...row.getRowProps(props.expandable ? row.getToggleRowExpandedProps() : "")}>
+                                        {row.cells.map((cell: any) => {
+                                            return (
+                                                <td {...cell.getCellProps()}>
+                                                    {cell.render('Cell')}
+                                                </td>
+                                            )
+                                        })}
+                                    </tr>
+                                    {row.isExpanded ? <tr className="expanded-row"><td colSpan={allColumns.length}>{props.expandComponent}</td></tr> : ""}
+                                </React.Fragment>
+                            )
+                        })}
+                    {isLoading ? <div className="spinner">
                         <Spinner animation="border" variant="primary" />
-                    </div>:null}
+                    </div> : null}
                 </tbody>
                 <tfoot>
                     <tr className="footer-row"><td colSpan={allColumns.length}>{renderFooter()}</td></tr>
@@ -159,10 +178,38 @@ const DataGrid: any = (props: DataGridProps) => {
         )
     }
 
+    const renderVirtualRow = React.useCallback(
+        ({ index, style }) => {
+            const row = rows[index]
+            prepareRow(row)
+            return (
+                <div
+                    {...row.getRowProps({
+                        style,
+                    },
+                        props.expandable ? row.getToggleRowExpandedProps() : ""
+                    )}
+                >
+                    <tr>
+                        {row.cells.map(cell => {
+                            return (
+                                <td {...cell.getCellProps()}>
+                                    {cell.render('Cell')}
+                                </td>
+                            )
+                        })}
+                    </tr>
+
+                </div>
+            )
+        },
+        [prepareRow, rows]
+    )
+
     const renderFooter = () => {
         return (
             <div className="footer">
-                {props.columnSelect?renderColumnSelect():null}
+                {props.columnSelect ? renderColumnSelect() : null}
                 {props.pagination
                     ? renderPagination()
                     : renderItemCount()
@@ -201,7 +248,7 @@ const DataGrid: any = (props: DataGridProps) => {
         )
     }
 
-    
+
     const renderItemCount = () => {
         return (
             <div className="record-count">
