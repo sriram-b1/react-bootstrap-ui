@@ -1,0 +1,57 @@
+@import '../App.scss';
+
+.form-check {
+    input {
+        
+    }
+}
+
+.form-check-label {
+    font-size: 14px;
+    line-height: 20px;
+    color: $gray-900;
+}
+
+.form-check-input {
+    width: 16px;
+    height: 16px;
+    
+}
+
+.form-check-input:checked {
+    background-color: $blue-600;
+    border-color: $blue-600;
+}
+.form-check-input:checked:hover {
+    background-color: $blue-700;
+}
+.form-check-input:focus {
+    box-shadow: 0 0 0 3px $blue-450;
+}
+
+.form-check-input[type="checkbox"] {
+    border-radius: 2px;
+    border-color: $gray-700;
+    &:hover {
+        border-color: $gray-900;
+    }
+}
+
+.form-check .form-check-input {
+}
+
+// Styles for form-check checked
+.was-validated .form-check-input:valid:checked, .form-check-input.is-valid:checked {
+    background-color: $blue-600;
+}
+
+.was-validated .form-check-input:valid:focus, .form-check-input.is-valid:focus {
+    box-shadow: 0 0 0 3px $blue-450;
+}
+
+.was-validated .form-check-input:valid ~ .form-check-label, .form-check-input.is-valid ~ .form-check-label {
+    font-size: 14px;
+    line-height: 20px;
+    color: $gray-900;
+    margin-left: 8px;
+}

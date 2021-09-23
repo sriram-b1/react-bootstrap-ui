@@ -4,6 +4,10 @@
     border-radius: unset;
     font-size: 14px;
     font-weight: 500;
+    line-height: 20px;
+    height: 32px;
+    min-width: 56px;
+    padding: 0 16px;
 }
 
 // To unset the box shadow on focused button / dropdowns
@@ -41,4 +45,17 @@
     background-color: $white;
     color: $blue-600;
     border: unset;   
+}
+
+// Small Buttons
+.btn-sm {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 20px;
+    height: 24px;
+}
+
+// Large Buttons
+.btn-lg {
+    height: 40px;
 }

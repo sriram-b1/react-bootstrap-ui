@@ -270,7 +270,7 @@ const DataGrid: any = (props: DataGridProps) => {
                         {allColumns.map((column: any) => (
                             <div key={column.id}>
                                 <label>
-                                    <input type="checkbox" {...column.getToggleHiddenProps()} />{' '}
+                                    <Form.Check type="checkbox" {...column.getToggleHiddenProps()} />{' '}
                                     {column.id}
                                 </label>
                             </div>
