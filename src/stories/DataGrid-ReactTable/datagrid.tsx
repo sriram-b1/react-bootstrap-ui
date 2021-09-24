@@ -34,12 +34,15 @@ const DataGrid: any = (props: DataGridProps) => {
         PREVIOUS = 'previous',
         NEXT = 'next'
     }
-    const data: any = React.useMemo(() =>
-        props.data,
-        []);
-    const columns: any = React.useMemo(() =>
-        props.column,
-        []);
+    const data: any = props.data;
+    const columns: any = props.column;
+
+    const defaultColumn = React.useMemo(
+        () => ({
+          width: 200,
+        }),
+        []
+      )
 
     const scrollBarSize = React.useMemo(() => scrollBarWidth, [])
 
@@ -67,6 +70,7 @@ const DataGrid: any = (props: DataGridProps) => {
         columns,
         data,
         initialState: { pageIndex: 0 },
+        defaultColumn,
     },
         useSortBy,
         useExpanded,
@@ -144,7 +148,7 @@ const DataGrid: any = (props: DataGridProps) => {
                             <FixedSizeList
                                 height={550}
                                 itemCount={rows.length}
-                                itemSize={35}
+                                itemSize={48}
                                 width={totalColumnsWidth + scrollBarSize}
                             >
                                 {renderVirtualRow}
@@ -269,10 +273,7 @@ const DataGrid: any = (props: DataGridProps) => {
                     <Dropdown.Menu>
                         {allColumns.map((column: any) => (
                             <div key={column.id}>
-                                <label>
-                                    <Form.Check type="checkbox" {...column.getToggleHiddenProps()} />{' '}
-                                    {column.id}
-                                </label>
+                                <Form.Check type="checkbox" {...column.getToggleHiddenProps()} label={column.id} />{' '}
                             </div>
                         ))}
                         <Button variant="light" onClick={() => toggleHideAllColumns(false)}>Select All</Button>
@@ -281,7 +282,7 @@ const DataGrid: any = (props: DataGridProps) => {
             </div>
         )
     }
-
+    
     return (
         <div>
             {renderTable()}
