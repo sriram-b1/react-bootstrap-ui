@@ -48,12 +48,12 @@ storiesOf("Button", module)
                 <Col>Small</Col>
             </Row>
             <Row>
-                <Col> <Button variant="success" size="lg">Tertiary</Button> </Col>
-                <Col> <Button variant="success">Tertiary</Button> </Col>
-                <Col> <Button variant="success" size="sm">Tertiary</Button> </Col>
+                <Col> <Button variant="success" size="lg">Success</Button> </Col>
+                <Col> <Button variant="success">Success</Button> </Col>
+                <Col> <Button variant="success" size="sm">Success</Button> </Col>
             </Row>
             <Row><Col className="d-grid">Fluid</Col></Row>
-            <Row><Col className="d-grid"><Button variant="success" size="lg">Tertiary</Button></Col></Row>
+            <Row><Col className="d-grid"><Button variant="success" size="lg">Success</Button></Col></Row>
 
         </Container>
     ))
@@ -99,12 +99,12 @@ storiesOf("Button", module)
                 <Col>Small</Col>
             </Row>
             <Row>
-                <Col> <Button variant="light" size="lg">Light</Button> </Col>
-                <Col> <Button variant="light">Light</Button> </Col>
-                <Col> <Button variant="light" size="sm">Light</Button> </Col>
+                <Col> <Button variant="light" size="lg">Tertiary</Button> </Col>
+                <Col> <Button variant="light">Tertiary</Button> </Col>
+                <Col> <Button variant="light" size="sm">Tertiary</Button> </Col>
             </Row>
             <Row><Col className="d-grid">Fluid</Col></Row>
-            <Row><Col className="d-grid"><Button variant="light" size="lg">Light</Button></Col></Row>
+            <Row><Col className="d-grid"><Button variant="light" size="lg">Tertiary</Button></Col></Row>
 
         </Container>
     ))
