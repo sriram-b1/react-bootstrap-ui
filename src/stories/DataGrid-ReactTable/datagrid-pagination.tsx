@@ -1,4 +1,5 @@
 import React from "react";
+import KeyValue from "../../components/KeyValueComponent/keyvalue";
 import { fetchData } from "../../utils/fetchdata";
 import DataGrid from "./datagrid";
 
@@ -43,6 +44,8 @@ export default class DataGridPagination extends React.Component<DataGridPaginati
                             column={covidRecordColumns}
                             pagination={this.props.pagination}
                             infiniteScroll={this.props.infiniteScroll}
+                            defaultColumnWidth={210}
+                            tableHeight={600}
                         ></DataGrid>
                     </div>
                 )

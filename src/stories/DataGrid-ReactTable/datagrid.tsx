@@ -6,9 +6,10 @@ import { Dropdown, DropdownButton, Form, Spinner } from "react-bootstrap";
 import '../../wrapper-styles/index.scss';
 import './datagrid-customstyles.scss';
 
-import sortDesc from '../../assets/images/chevron-down.png';
-import sortAsc from '../../assets/images/chevron-up.png';
+import sortDesc from '../../assets/images/arrow-down.png';
+import sortAsc from '../../assets/images/arrow-up.png';
 import columnPicker from '../../assets/images/column-picker.png';
+import expansion from '../../assets/images/chevron-right.png';
 import { DebounceUtils } from "../../utils/debounceUtils";
 
 import { FixedSizeList } from 'react-window'
@@ -23,6 +24,8 @@ type DataGridProps = {
     columnSelect?: boolean;
     infiniteScroll?: boolean;
     tableType?: "csg" | "isg" | "compact";
+    defaultColumnWidth?: number;
+    tableHeight?: number;
 }
 
 
@@ -55,7 +58,7 @@ const DataGrid: any = (props: DataGridProps) => {
 
     const defaultColumn = React.useMemo(
         () => ({
-            width: 200,
+            width: props.defaultColumnWidth?props.defaultColumnWidth:200,
         }),
         []
     )
@@ -119,16 +122,20 @@ const DataGrid: any = (props: DataGridProps) => {
             }
             gotoPage(nextPage);
         }
-        setLoading(false)
+        // Intentionally setting timeout to indicate the data change
+        setTimeout(() => setLoading(false), 10);
     }
 
     const onPageNavigation = async (type: Navigate) => {
+        setLoading(true);
         if (type === Navigate.PREVIOUS) {
             await previousPage();
         } else if (type === Navigate.NEXT) {
             await nextPage();
         }
         pageRef.current!.value = pageIndex + 1;
+        // Intentionally setting timeout to indicate the data change
+        setTimeout(() => setLoading(false), 10);
     }
 
     // Render functions
@@ -141,6 +148,7 @@ const DataGrid: any = (props: DataGridProps) => {
                             {...headerGroup.getHeaderGroupProps()}
                             className={props.tableType === TABLE_TYPES.CSG ? 'csg-header' : props.tableType === TABLE_TYPES.ISG ? 'isg-header' : props.tableType === TABLE_TYPES.COMPACT ? 'compact-header' : 'csg-header'}
                         >
+                            {props.expandable?<th></th>:null}
                             {headerGroups.map((grp: any) => (
                                 grp.headers.map((column: any) => (
                                     <th {...column.getHeaderProps(props.sorting ? column.getSortByToggleProps() : "")}>
@@ -165,7 +173,7 @@ const DataGrid: any = (props: DataGridProps) => {
                     {props.infiniteScroll
                         ? (
                             <FixedSizeList
-                                height={550}
+                                height={props.tableHeight?props.tableHeight: 550}
                                 itemCount={rows.length}
                                 itemSize={props.tableType === TABLE_TYPES.CSG ? TABLE_ROW_HEIGHT.CSG : props.tableType === TABLE_TYPES.ISG ? TABLE_ROW_HEIGHT.ISG : props.tableType === TABLE_TYPES.COMPACT ? TABLE_ROW_HEIGHT.COMPACT : TABLE_ROW_HEIGHT.CSG}
                                 width={totalColumnsWidth + scrollBarSize}
@@ -177,8 +185,9 @@ const DataGrid: any = (props: DataGridProps) => {
                             prepareRow(row)
                             return (
                                 <React.Fragment>
-                                    <tr {...row.getRowProps(props.expandable ? row.getToggleRowExpandedProps() : "")}
+                                    <tr {...row.getRowProps()}
                                         className={props.tableType === TABLE_TYPES.ISG ? 'isg-row' : props.tableType === TABLE_TYPES.CSG ? 'csg-row' : props.tableType === TABLE_TYPES.COMPACT ? 'compact-row' : 'csg-row'} >
+                                        {props.expandable?<td className="expansion-column" {...row.getRowProps(row.getToggleRowExpandedProps())}>{<div className={row.isExpanded?"expansion-icon expanded":"expansion-icon"}><img src={expansion} alt="expansion icon"/></div>}</td>: null}
                                         {row.cells.map((cell: any) => {
                                             return (
                                                 <td {...cell.getCellProps()}>
@@ -187,7 +196,7 @@ const DataGrid: any = (props: DataGridProps) => {
                                             )
                                         })}
                                     </tr>
-                                    {row.isExpanded ? <tr className="expanded-row"><td colSpan={allColumns.length}>{props.expandComponent}</td></tr> : ""}
+                                    {row.isExpanded ? <tr className="expanded-row"><td colSpan={allColumns.length + 1}>{props.expandComponent}</td></tr> : ""}
                                 </React.Fragment>
                             )
                         })}
@@ -196,7 +205,7 @@ const DataGrid: any = (props: DataGridProps) => {
                     </div> : null}
                 </tbody>
                 <tfoot>
-                    <tr className="footer-row"><td colSpan={allColumns.length}>{renderFooter()}</td></tr>
+                    <tr className="footer-row"><td colSpan={props.expandable?allColumns.length+1:allColumns.length}>{renderFooter()}</td></tr>
                 </tfoot>
             </table>
         )
@@ -211,13 +220,13 @@ const DataGrid: any = (props: DataGridProps) => {
                     {...row.getRowProps({
                         style,
                     },
-                        props.expandable ? row.getToggleRowExpandedProps() : ""
                     )}
                 >
                     <tr
                         className={props.tableType === TABLE_TYPES.ISG ? 'isg-row' : props.tableType === TABLE_TYPES.CSG ? 'csg-row' : props.tableType === TABLE_TYPES.COMPACT ? 'compact-row' : 'csg-row'}
                     >
-                        {row.cells.map(cell => {
+                        {props.expandable?<td className="expansion-column" {...row.getRowProps(row.getToggleRowExpandedProps())}>{<div className={row.isExpanded?"expansion-icon expanded":"expansion-icon"}><img src={expansion} alt="expansion icon"/></div>}</td>: null}
+                        {row.cells.map((cell: any) => {
                             return (
                                 <td {...cell.getCellProps()}>
                                     {cell.render('Cell')}
@@ -255,6 +264,8 @@ const DataGrid: any = (props: DataGridProps) => {
                     <DropdownButton title={pageSize} variant="outline-primary">
                         <Dropdown.Item onClick={() => setPageSize(5)}>5</Dropdown.Item>
                         <Dropdown.Item onClick={() => setPageSize(10)}>10</Dropdown.Item>
+                        {data.length>100?<Dropdown.Item onClick={() => setPageSize(100)}>100</Dropdown.Item>:null}
+                        {data.length>1000?<Dropdown.Item onClick={() => setPageSize(1000)}>1000</Dropdown.Item>:null}
                     </DropdownButton>
                     <Button variant="light" onClick={() => onPageNavigation(Navigate.PREVIOUS)} disabled={!canPreviousPage}>{'<'}</Button>
                     <span>
