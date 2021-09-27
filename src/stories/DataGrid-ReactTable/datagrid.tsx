@@ -22,6 +22,7 @@ type DataGridProps = {
     pagination?: boolean;
     columnSelect?: boolean;
     infiniteScroll?: boolean;
+    tableType?: "csg" | "isg" | "compact";
 }
 
 
@@ -34,15 +35,30 @@ const DataGrid: any = (props: DataGridProps) => {
         PREVIOUS = 'previous',
         NEXT = 'next'
     }
+    enum TABLE_TYPES {
+        CSG = "csg",
+        ISG = "isg",
+        COMPACT = "compact",
+    }
+    enum TABLE_ROW_HEIGHT {
+        CSG = 48,
+        ISG = 40,
+        COMPACT = 32,
+    }
+    enum TABLE_HEADER_HEIGHT {
+        CSG = 56,
+        ISG = 48,
+        COMPACT = 40,
+    }
     const data: any = props.data;
     const columns: any = props.column;
 
     const defaultColumn = React.useMemo(
         () => ({
-          width: 200,
+            width: 200,
         }),
         []
-      )
+    )
 
     const scrollBarSize = React.useMemo(() => scrollBarWidth, [])
 
@@ -118,10 +134,13 @@ const DataGrid: any = (props: DataGridProps) => {
     // Render functions
     const renderTable = () => {
         return (
-            <table {...getTableProps()} style={props.infiniteScroll?{width: totalColumnsWidth}:null}>
+            <table {...getTableProps()} style={props.infiniteScroll ? { width: totalColumnsWidth } : null}>
                 <thead>
                     {headerGroups.map((headerGroup: any) => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
+                        <tr
+                            {...headerGroup.getHeaderGroupProps()}
+                            className={props.tableType === TABLE_TYPES.CSG ? 'csg-header' : props.tableType === TABLE_TYPES.ISG ? 'isg-header' : props.tableType === TABLE_TYPES.COMPACT ? 'compact-header' : 'csg-header'}
+                        >
                             {headerGroups.map((grp: any) => (
                                 grp.headers.map((column: any) => (
                                     <th {...column.getHeaderProps(props.sorting ? column.getSortByToggleProps() : "")}>
@@ -148,7 +167,7 @@ const DataGrid: any = (props: DataGridProps) => {
                             <FixedSizeList
                                 height={550}
                                 itemCount={rows.length}
-                                itemSize={48}
+                                itemSize={props.tableType === TABLE_TYPES.CSG ? TABLE_ROW_HEIGHT.CSG : props.tableType === TABLE_TYPES.ISG ? TABLE_ROW_HEIGHT.ISG : props.tableType === TABLE_TYPES.COMPACT ? TABLE_ROW_HEIGHT.COMPACT : TABLE_ROW_HEIGHT.CSG}
                                 width={totalColumnsWidth + scrollBarSize}
                             >
                                 {renderVirtualRow}
@@ -158,7 +177,8 @@ const DataGrid: any = (props: DataGridProps) => {
                             prepareRow(row)
                             return (
                                 <React.Fragment>
-                                    <tr {...row.getRowProps(props.expandable ? row.getToggleRowExpandedProps() : "")}>
+                                    <tr {...row.getRowProps(props.expandable ? row.getToggleRowExpandedProps() : "")}
+                                        className={props.tableType === TABLE_TYPES.ISG ? 'isg-row' : props.tableType === TABLE_TYPES.CSG ? 'csg-row' : props.tableType === TABLE_TYPES.COMPACT ? 'compact-row' : 'csg-row'} >
                                         {row.cells.map((cell: any) => {
                                             return (
                                                 <td {...cell.getCellProps()}>
@@ -194,7 +214,9 @@ const DataGrid: any = (props: DataGridProps) => {
                         props.expandable ? row.getToggleRowExpandedProps() : ""
                     )}
                 >
-                    <tr>
+                    <tr
+                        className={props.tableType === TABLE_TYPES.ISG ? 'isg-row' : props.tableType === TABLE_TYPES.CSG ? 'csg-row' : props.tableType === TABLE_TYPES.COMPACT ? 'compact-row' : 'csg-row'}
+                    >
                         {row.cells.map(cell => {
                             return (
                                 <td {...cell.getCellProps()}>
@@ -271,6 +293,7 @@ const DataGrid: any = (props: DataGridProps) => {
                         </figure>
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
+                        <Form.Label className="row-select-title">Select Columns</Form.Label>
                         {allColumns.map((column: any) => (
                             <div key={column.id}>
                                 <Form.Check type="checkbox" {...column.getToggleHiddenProps()} label={column.id} />{' '}
@@ -282,7 +305,7 @@ const DataGrid: any = (props: DataGridProps) => {
             </div>
         )
     }
-    
+
     return (
         <div>
             {renderTable()}

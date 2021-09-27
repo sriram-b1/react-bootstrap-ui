@@ -13,6 +13,17 @@ thead {
 }
 tbody {
     border: $table-border;
+    tr {
+        &:hover {
+            background-color: $gray-100;
+        }
+        &:focus {
+            background-color: $blue-50;
+        }
+        &:active {
+            background-color: $blue-100;
+        }
+    }
 }
 
 tr {
@@ -31,10 +42,11 @@ th {
         content: "";
         position: absolute;
         right: 0;
-        top: 16px;
-        bottom: 14px;
+        top: 25%;
+        bottom: 0;
         color: transparent;
         border-right: $table-border;
+        max-height: 24px;
     }
     &:last-child{
         ::after {
@@ -45,7 +57,7 @@ th {
 }
 
 td, th {
-    padding: 10px 16px;
+    padding: 0 24px 0 16px;
 }
 td {
     font-size: 14px;

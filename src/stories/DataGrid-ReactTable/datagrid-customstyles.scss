@@ -1,6 +1,12 @@
 @import '../../App.scss';
 
 $table-border: 1px solid $gray-300;
+$isg-row-height: 40px;
+$csg-row-height: 48px;
+$compact-row-height: 32px;
+$isg-header-height: 48px;
+$csg-header-height: 56px;
+$compact-header-height: 40px;
 
 .expanded-row {
     border-top: unset;
@@ -27,7 +33,7 @@ $table-border: 1px solid $gray-300;
     justify-content: center;
     width: 100%;
     height: 100%;
-    background-color: $gray-900-opacity;
+    opacity: 0.5;
 }
 .footer {
     display: flex;
@@ -99,4 +105,44 @@ $table-border: 1px solid $gray-300;
 .sorting-icons {
     max-width: 8px;
     line-height: 20px;
+}
+
+.isg-row {
+    height: $isg-row-height;
+    line-height: $isg-row-height;
+}
+.csg-row {
+    height: $csg-row-height;
+    line-height: $csg-row-height;
+}
+.compact-row {
+    height: $compact-row-height;
+    line-height: $compact-row-height;
+}
+
+.isg-header {
+    height: $isg-header-height;
+    line-height: $isg-header-height;
+}
+
+.csg-header {
+    height: $csg-header-height;
+    line-height: $csg-header-height;
+}
+
+.compact-header {
+    height: $compact-header-height;
+    line-height: $compact-header-height;
+}
+
+.isg-row, .csg-row, .compact-row, .isg-header, .csg-header, .compact-header {
+    td, th {
+        height: inherit;
+        line-height: inherit;
+    }
+}
+
+.row-select-title {
+    font-weight: bold;
+    padding: 10px 0;
 }

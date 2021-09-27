@@ -17,11 +17,30 @@ const columns = [
 
 
 storiesOf("Data Grid - ReactTable", module)
-    .add("Normal Table", () => (
+    .add("Normal Table - CSG", () => (
         <div>
             <DataGrid
                 data={DATA.data}
                 column={columns}
+                tableType="csg"
+            ></DataGrid>
+        </div>
+    ))
+    .add("Normal Table - ISG", () => (
+        <div>
+            <DataGrid
+                data={DATA.data}
+                column={columns}
+                tableType="isg"
+            ></DataGrid>
+        </div>
+    ))
+    .add("Normal Table - Compact", () => (
+        <div>
+            <DataGrid
+                data={DATA.data}
+                column={columns}
+                tableType="compact"
             ></DataGrid>
         </div>
     ))
