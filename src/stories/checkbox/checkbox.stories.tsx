@@ -4,7 +4,7 @@ import {storiesOf} from "@storybook/react";
 import '../../wrapper-styles/index.scss'
 import { Form } from 'react-bootstrap';
 
-storiesOf("Checkbox", module)
+storiesOf("POC1/Checkbox", module)
     .add("Simple Check box", () => (
         <div>
             <Form.Check type="checkbox" id="1">

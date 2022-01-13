@@ -5,7 +5,7 @@ import { Button, Container, Row, Col } from 'react-bootstrap';
 
 import '../../wrapper-styles/index.scss'
 
-storiesOf("Button", module)
+storiesOf("POC1/Button", module)
     .add("Primary", () => (
         <Container>
             <Row>
