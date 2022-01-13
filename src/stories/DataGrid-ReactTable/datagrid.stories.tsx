@@ -17,6 +17,17 @@ const columns = [
 
 
 storiesOf("Data Grid - ReactTable", module)
+    .add("POC", () => (
+        <div>
+            <DataGrid
+                data={DATA.data}
+                column={columns}
+                expandable
+                expandComponent={<KeyValue></KeyValue>}
+                columnSelect
+            ></DataGrid>
+        </div>
+    ))
     .add("Normal Table - CSG", () => (
         <div>
             <DataGrid
