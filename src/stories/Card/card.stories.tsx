@@ -2,7 +2,13 @@ import React from 'react';
 import { storiesOf } from "@storybook/react";
 import '../../wrapper-styles/index.scss'
 import './card.scss'
-import { Card } from 'react-bootstrap';
+import { Button, Card, Col, Container, Row } from 'react-bootstrap';
+import ProgressBar from '../Circular-Progress/progress';
+
+
+import tick from '../../assets/images/tick.png'
+import warning from '../../assets/images/warning.png'
+import danger from '../../assets/images/danger.png'
 
 storiesOf("POC2/Card", module)
     .add("Normal Card", () => (
@@ -52,4 +58,64 @@ storiesOf("POC2/Card", module)
 
             </Card.Body>
         </Card>
+    ))
+    .add("CPU", () => (
+        <Container fluid>
+            <Col>
+                <Row>
+                    <Card style={{ width: '16rem', margin: '20px' }}>
+                        <Card.Header>CPU</Card.Header>
+                        <Card.Body>
+                            <ProgressBar size={175} progress={43} limits={[
+                                { value: 0, color: '#6EA204' },
+                                { value: 50, color: '#F2AF00' },
+                                { value: 75, color: '#CE1126' }
+                            ]} label="55 Ghz" />
+                        </Card.Body>
+                    </Card>
+
+                    <Card style={{ width: '16rem', margin: '20px' }}>
+                        <Card.Header>Memory</Card.Header>
+                        <Card.Body>
+                            <ProgressBar size={175} progress={55} limits={[
+                                { value: 0, color: '#6EA204' },
+                                { value: 50, color: '#F2AF00' },
+                                { value: 75, color: '#CE1126' }
+                            ]} label="500 GiB" />
+                        </Card.Body>
+                    </Card>
+                    <Card style={{ width: '27rem', margin: '20px' }}>
+                        <Card.Header>Disks</Card.Header>
+                        <Card.Body>
+                            <div className="table-container">
+                                <ProgressBar size={175} progress={27} limits={[
+                                    { value: 0, color: '#6EA204' },
+                                    { value: 50, color: '#F2AF00' },
+                                    { value: 75, color: '#CE1126' }
+                                ]} label="500 TiB" />
+                                <div className="table">
+                                    <table>
+                                        <tr>
+                                            <td><div className='icon-sm'><img src={tick} alt="tick" /></div></td>
+                                            <td>Good</td>
+                                            <td><Button variant="light">4</Button></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div className="icon-sm"><img src={danger} alt="tick" /></div></td>
+                                            <td>Bad</td>
+                                            <td><Button variant="light" disabled>0</Button></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div className="icon-sm"><img src={warning} alt="tick" /></div></td>
+                                            <td>Suspect</td>
+                                            <td><Button variant="light" disabled>0</Button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </Card.Body>
+                    </Card>
+                </Row>
+            </Col>
+        </Container>
     ))
