@@ -1,7 +1,7 @@
 @import "../App.scss";
 
 .btn {
-    border-radius: unset;
+    border-radius: 2px;
     font-size: 14px;
     font-weight: 500;
     line-height: 20px;
@@ -15,15 +15,59 @@
     box-shadow: unset;
 }
 
+.btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: unset;
+}
+
+.btn-check:checked + .btn-outline-primary:focus, .btn-check:active + .btn-outline-primary:focus, .btn-outline-primary:active:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus {
+    box-shadow: unset;
+}
+.btn-check:checked + .btn-light:focus, .btn-check:active + .btn-light:focus, .btn-light:active:focus, .btn-light.active:focus, .show > .btn-light.dropdown-toggle:focus {
+    box-shadow: unset;
+}
+
 .btn-primary {
     background-color: $blue-600;
     border-color: $blue-600;
+    &:hover {
+        background-color: $blue-700;   
+        border-color: $blue-600; 
+    }
+    &:focus {
+        background-color: $blue-600;
+        box-shadow:0 0 0 1px $white, 0 0 0 3px $blue-450;
+    }
+    &:active {
+        background-color: $blue-800;
+        box-shadow: unset;
+        border-color: $blue-600;
+    }
+    &:disabled {
+        background-color: $gray-200;
+        color: $gray-450;
+        border-color: $gray-200;
+    }
 }
 
 .btn-outline-primary {
     background-color: $white;
     color: $blue-600;
     border: 1px solid $blue-600;
+    &:hover {
+        background-color: $blue-50;
+        color: $blue-600;
+    }
+    &:focus {
+        box-shadow:0 0 0 1px $white, 0 0 0 3px $blue-450;
+    }
+    &:active {
+        background-color: $blue-100;
+        color: $blue-600;
+    }
+    &:disabled {
+        border-color: $gray-450;
+        color: $gray-450;
+    }
 }
 
 .btn-success {
@@ -42,9 +86,25 @@
 }
 
 .btn-light {
-    background-color: $white;
+    background-color: transparent;
     color: $blue-600;
     border: unset;   
+    &:hover {
+        color: $blue-700;
+        background-color: transparent;
+    }
+    &:focus {
+        color: $blue-600;
+        box-shadow:0 0 0 1px $white, 0 0 0 3px $blue-450;
+    }
+    &:active {
+        color: $blue-800;
+        background-color: transparent;
+    }
+    &:disabled {
+        color: $gray-450;
+        background-color: transparent;
+    }
 }
 
 // Small Buttons
