@@ -15,23 +15,12 @@
     box-shadow: unset;
 }
 
-.btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
-    box-shadow: unset;
-}
-
-.btn-check:checked + .btn-outline-primary:focus, .btn-check:active + .btn-outline-primary:focus, .btn-outline-primary:active:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus {
-    box-shadow: unset;
-}
-.btn-check:checked + .btn-light:focus, .btn-check:active + .btn-light:focus, .btn-light:active:focus, .btn-light.active:focus, .show > .btn-light.dropdown-toggle:focus {
-    box-shadow: unset;
-}
-
 .btn-primary {
     background-color: $blue-600;
     border-color: $blue-600;
     &:hover {
         background-color: $blue-700;   
-        border-color: $blue-600; 
+        border-color: $blue-600;
     }
     &:focus {
         background-color: $blue-600;
@@ -73,16 +62,60 @@
 .btn-success {
     background-color: $green-400;
     border-color: $green-400;
+    &:hover {
+        background-color: $success-button-hover;
+    }
+    &:focus {
+        background-color: $green-400;
+        box-shadow:0 0 0 1px $white, 0 0 0 3px $blue-450;
+    }
+    &:active {
+        background-color: $success-button-active;
+    }
+    &:disabled {
+        background-color: $gray-200;
+        border-color: $gray-200;
+        color: $gray-450;
+    }
 }
 
 .btn-warning {
     background-color: $yellow-300;
-    border-color: $yellow-300;
+    color: $gray-900;
+    &:hover {
+        background-color: $warning-button-hover;
+    }
+    &:focus {
+        box-shadow:0 0 0 1px $white, 0 0 0 3px $blue-450;
+    }
+    &:active {
+        background-color: $warning-button-active;
+    }
+    &:disabled {
+        border-color: $gray-200;
+        background-color: $gray-200;
+        color: $gray-450;
+    }
 }
 
 .btn-danger {
     background-color: $red-700;
     border-color: $red-700;
+    &:hover {
+        background-color: $danger-button-hover;
+    }
+    &:focus {
+        box-shadow:0 0 0 1px $white, 0 0 0 3px $blue-450;
+        background-color: $red-700;
+    }
+    &:active {
+        background-color: $danger-button-active;
+    }
+    &:disabled {
+        background-color: $gray-200;
+        border-color: $gray-200;
+        color: $gray-450;
+    }
 }
 
 .btn-light {
@@ -118,4 +151,14 @@
 // Large Buttons
 .btn-lg {
     height: 40px;
+}
+
+// Remove border on Active + Focus
+.btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus,
+.btn-check:checked + .btn-outline-primary:focus, .btn-check:active + .btn-outline-primary:focus, .btn-outline-primary:active:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus,
+.btn-check:checked + .btn-light:focus, .btn-check:active + .btn-light:focus, .btn-light:active:focus, .btn-light.active:focus, .show > .btn-light.dropdown-toggle:focus,
+.btn-check:checked + .btn-warning:focus, .btn-check:active + .btn-warning:focus, .btn-warning:active:focus, .btn-warning.active:focus, .show > .btn-warning.dropdown-toggle:focus,
+.btn-check:checked + .btn-success:focus, .btn-check:active + .btn-success:focus, .btn-success:active:focus, .btn-success.active:focus, .show > .btn-success.dropdown-toggle:focus,
+.btn-check:checked + .btn-danger:focus, .btn-check:active + .btn-danger:focus, .btn-danger:active:focus, .btn-danger.active:focus, .show > .btn-danger.dropdown-toggle:focus {
+    box-shadow: unset;
 }
