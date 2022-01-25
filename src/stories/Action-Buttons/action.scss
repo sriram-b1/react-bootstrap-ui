@@ -1,0 +1,58 @@
+@import '../../App.scss';
+
+
+.action-select {
+    // making the button color to transparent
+    .btn-primary, .btn-primary:focus, .btn-primary:hover, .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
+        background-color: transparent;
+        border: unset;
+        padding: 0px;
+    }
+    // removing the focus box shadow
+    .btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
+        box-shadow: unset;
+    }
+    // To remove drop down icon as it is not required in this case
+    .dropdown-toggle::after {
+        content: none;
+    }
+}
+
+.spinner-size{
+    width: 25px;
+    height: 25px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    margin-left: 10px;
+    .spinner-border {
+        border: 0.2em solid currentColor !important;
+    }
+}
+
+.updating-text{
+    margin-left: 15px;
+}
+
+.action-select-dots {
+    width: 200px;
+}
+
+.action-spinner{
+    color: #006DB8 !important;
+    width: 25px !important;   
+
+}
+
+.option-button{
+        // padding-bottom: 20px !important;
+        // padding-left: 0px !important;
+        // height: 30px;
+        // padding-right: 20px;
+        
+        padding-bottom: 20px !important;
+        /* padding-left: 0px !important; */
+        /* height: 30px; */
+        /* padding-right: 20px; */
+        padding-top: 0px !important;
+        height: 0px !important;
+}
