@@ -15,7 +15,6 @@ const Action = (props: any) => {
         }
 
         const renderMantainenceAction = () =>{
-            console.log("12");
             return (
             //    renderSpinner()
                 setActionLoading(true)
@@ -38,13 +37,11 @@ const Action = (props: any) => {
             return (
                 <div >
                 <Dropdown className="action-select">
-                {/* <Button variant="light" size="lg">Maintenence</Button> */}
                 <Button variant="light" onClick={() => renderMantainenceAction()}>Maintenence</Button>
                 <Button variant="light" >Edit</Button>
                 <Button variant="light" onClick={() => renderRemoveAction()}>Remove</Button>
                     <Dropdown.Toggle  >
                         <Button variant="light">...</Button>
-                        {/* <Button variant="light" size="lg" className="option-button" >...</Button> */}
                     </Dropdown.Toggle>
                     <Dropdown.Menu className="action-select-dots">
                         <Button variant="light" >Standby</Button>
