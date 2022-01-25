@@ -6,6 +6,7 @@
     font-weight: unset;
     padding: 5px 8px;
     text-align: center;
+    display: unset;
 }
 .bg-primary {
     background-color: $blue-100 !important;
@@ -35,4 +36,8 @@
 .bg-info {
     background-color: $orange-400 !important;
     color: $white;
+}
+
+.badge-pills {
+    color: $white !important;
 }

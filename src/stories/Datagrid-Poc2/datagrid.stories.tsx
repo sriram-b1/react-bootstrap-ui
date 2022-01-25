@@ -6,7 +6,7 @@ import tick from '../../assets/images/tick.png'
 import Chart from '../Chart/chart';
 import { Badge, Button } from 'react-bootstrap';
 
-const columns = [
+export const columns = [
     { accessor: "status", Header: "Status" },
     { accessor: "node", Header: "Node" },
     { accessor: "ips", Header: "IPs" },
@@ -18,21 +18,197 @@ const columns = [
     { accessor: "actions", Header: "Actions" },
 ];
 
-const status = (<div style={{ width: "25px" }}><img src={tick} alt='tick' /></div>)
-const cpu = (<div><Chart /></div>)
-const node = (<div>
+export const status = (<div style={{ width: "25px" }}><img src={tick} alt='tick' /></div>)
+export const cpu = (<div><Chart /></div>)
+export const node = (<div>
     <Button variant="light">node-foo.dell.lab.com</Button>
 </div>)
 
-const disks = (
+export const disks = (
     <div>
-        <Badge style={{margin: "2.5px"}} pill bg="success">4</Badge>
-        <Badge style={{margin: "2.5px"}} pill bg="warning">0</Badge>
-        <Badge style={{margin: "2.5px"}}pill bg="danger">0</Badge>
+        <Badge style={{margin: "2.5px"}} pill bg="success" className='badge-pills'>4</Badge>
+        <Badge style={{margin: "2.5px"}} pill bg="warning" className='badge-pills'>0</Badge>
+        <Badge style={{margin: "2.5px"}}pill bg="danger" className='badge-pills'>0</Badge>
     </div>
 )
 
-const data = [
+export const data = [
+    {
+        status,
+        node,
+        ips: 4,
+        version: 1.2,
+        role: "Master",
+        disks,
+        cpu,
+        memory: cpu,
+        actions: "TBD",
+    },
+    {
+        status,
+        node,
+        ips: 3,
+        version: 2.4,
+        role: "Worker",
+        disks,
+        cpu,
+        memory: cpu,
+        actions: "TBD",
+    },
+    {
+        status,
+        node,
+        ips: 4,
+        version: 1.2,
+        role: "Master",
+        disks,
+        cpu,
+        memory: cpu,
+        actions: "TBD",
+    },
+    {
+        status,
+        node,
+        ips: 3,
+        version: 2.4,
+        role: "Worker",
+        disks,
+        cpu,
+        memory: cpu,
+        actions: "TBD",
+    },
+    {
+        status,
+        node,
+        ips: 4,
+        version: 1.2,
+        role: "Master",
+        disks,
+        cpu,
+        memory: cpu,
+        actions: "TBD",
+    },
+    {
+        status,
+        node,
+        ips: 3,
+        version: 2.4,
+        role: "Worker",
+        disks,
+        cpu,
+        memory: cpu,
+        actions: "TBD",
+    },
+    {
+        status,
+        node,
+        ips: 4,
+        version: 1.2,
+        role: "Master",
+        disks,
+        cpu,
+        memory: cpu,
+        actions: "TBD",
+    },
+    {
+        status,
+        node,
+        ips: 3,
+        version: 2.4,
+        role: "Worker",
+        disks,
+        cpu,
+        memory: cpu,
+        actions: "TBD",
+    },
+    {
+        status,
+        node,
+        ips: 4,
+        version: 1.2,
+        role: "Master",
+        disks,
+        cpu,
+        memory: cpu,
+        actions: "TBD",
+    },
+    {
+        status,
+        node,
+        ips: 3,
+        version: 2.4,
+        role: "Worker",
+        disks,
+        cpu,
+        memory: cpu,
+        actions: "TBD",
+    },
+    {
+        status,
+        node,
+        ips: 4,
+        version: 1.2,
+        role: "Master",
+        disks,
+        cpu,
+        memory: cpu,
+        actions: "TBD",
+    },
+    {
+        status,
+        node,
+        ips: 3,
+        version: 2.4,
+        role: "Worker",
+        disks,
+        cpu,
+        memory: cpu,
+        actions: "TBD",
+    },
+    {
+        status,
+        node,
+        ips: 4,
+        version: 1.2,
+        role: "Master",
+        disks,
+        cpu,
+        memory: cpu,
+        actions: "TBD",
+    },
+    {
+        status,
+        node,
+        ips: 3,
+        version: 2.4,
+        role: "Worker",
+        disks,
+        cpu,
+        memory: cpu,
+        actions: "TBD",
+    },
+    {
+        status,
+        node,
+        ips: 4,
+        version: 1.2,
+        role: "Master",
+        disks,
+        cpu,
+        memory: cpu,
+        actions: "TBD",
+    },
+    {
+        status,
+        node,
+        ips: 3,
+        version: 2.4,
+        role: "Worker",
+        disks,
+        cpu,
+        memory: cpu,
+        actions: "TBD",
+    },
     {
         status,
         node,
