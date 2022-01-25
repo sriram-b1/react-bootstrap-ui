@@ -2,7 +2,7 @@ import React from 'react';
 import {storiesOf} from "@storybook/react";
 import {action} from "@storybook/addon-actions";
 import { Button, Container, Row, Col } from 'react-bootstrap';
-
+import * as Icon from 'react-bootstrap-icons';
 import '../../wrapper-styles/index.scss'
 
 storiesOf("POC1/Button", module)
@@ -113,3 +113,21 @@ storiesOf("POC1/Button", module)
             <Button variant="link">Link</Button>
         </div>
     ))
+
+    .add("Link", () => (
+        <div>
+            <Button variant="link">Link</Button>
+        </div>
+    ))
+    .add("Icon Buttons", () => (
+        <Container>
+          
+            <Row>
+                <Col> <Button variant="outline-primary"><span style={{paddingBottom: '4px', paddingRight: '3px'}}>Grafana  </span><Icon.BoxArrowUpRight style={{paddingBottom: '4px'}} color="#0076CE" size={20}/></Button> </Col>
+                <Col> <Button style={{padding : '0 5px', minWidth: '0px'}} variant="outline-primary"><Icon.ArrowRepeat  color="#0076CE" size={21}/></Button> </Col>
+            </Row>
+          
+        </Container>
+    ))
+    console.log("Icons ",Icon);   
+

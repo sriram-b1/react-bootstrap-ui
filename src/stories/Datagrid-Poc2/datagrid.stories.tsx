@@ -5,6 +5,8 @@ import DataGrid from '../DataGrid-ReactTable/datagrid';
 import tick from '../../assets/images/tick.png'
 import Chart from '../Chart/chart';
 import { Badge, Button } from 'react-bootstrap';
+import { Dropdown, DropdownButton, Form, Spinner } from "react-bootstrap";
+import Action from '../Action-Buttons/action';
 
 export const columns = [
     { accessor: "status", Header: "Status" },
@@ -32,6 +34,9 @@ export const disks = (
     </div>
 )
 
+export const action = (<div style={{width: '350px'}}> <Action /> </div>)
+
+
 export const data = [
     {
         status,
@@ -42,7 +47,7 @@ export const data = [
         disks,
         cpu,
         memory: cpu,
-        actions: "TBD",
+        actions: action,
     },
     {
         status,
@@ -53,7 +58,7 @@ export const data = [
         disks,
         cpu,
         memory: cpu,
-        actions: "TBD",
+        actions: action,
     },
     {
         status,
@@ -64,7 +69,7 @@ export const data = [
         disks,
         cpu,
         memory: cpu,
-        actions: "TBD",
+        actions: action,
     },
     {
         status,
@@ -75,7 +80,7 @@ export const data = [
         disks,
         cpu,
         memory: cpu,
-        actions: "TBD",
+        actions: action,
     },
     {
         status,
@@ -86,7 +91,7 @@ export const data = [
         disks,
         cpu,
         memory: cpu,
-        actions: "TBD",
+        actions: action,
     },
     {
         status,
@@ -97,7 +102,7 @@ export const data = [
         disks,
         cpu,
         memory: cpu,
-        actions: "TBD",
+        actions: action,
     },
     {
         status,
@@ -108,7 +113,7 @@ export const data = [
         disks,
         cpu,
         memory: cpu,
-        actions: "TBD",
+        actions: action,
     },
     {
         status,
@@ -119,7 +124,7 @@ export const data = [
         disks,
         cpu,
         memory: cpu,
-        actions: "TBD",
+        actions: action,
     },
     {
         status,
@@ -130,7 +135,7 @@ export const data = [
         disks,
         cpu,
         memory: cpu,
-        actions: "TBD",
+        actions: action,
     },
     {
         status,
@@ -141,7 +146,7 @@ export const data = [
         disks,
         cpu,
         memory: cpu,
-        actions: "TBD",
+        actions: action,
     },
     {
         status,
@@ -152,7 +157,7 @@ export const data = [
         disks,
         cpu,
         memory: cpu,
-        actions: "TBD",
+        actions: action,
     },
     {
         status,
@@ -163,7 +168,7 @@ export const data = [
         disks,
         cpu,
         memory: cpu,
-        actions: "TBD",
+        actions: action,
     },
     {
         status,
@@ -174,7 +179,7 @@ export const data = [
         disks,
         cpu,
         memory: cpu,
-        actions: "TBD",
+        actions: action,
     },
     {
         status,
@@ -185,7 +190,7 @@ export const data = [
         disks,
         cpu,
         memory: cpu,
-        actions: "TBD",
+        actions: action,
     },
     {
         status,
@@ -196,7 +201,7 @@ export const data = [
         disks,
         cpu,
         memory: cpu,
-        actions: "TBD",
+        actions: action,
     },
     {
         status,
@@ -207,7 +212,7 @@ export const data = [
         disks,
         cpu,
         memory: cpu,
-        actions: "TBD",
+        actions: action,
     },
     {
         status,
@@ -218,7 +223,7 @@ export const data = [
         disks,
         cpu,
         memory: cpu,
-        actions: "TBD",
+        actions: action,
     },
     {
         status,
@@ -229,7 +234,7 @@ export const data = [
         disks,
         cpu,
         memory: cpu,
-        actions: "TBD",
+        actions: action,
     }
 ]
 

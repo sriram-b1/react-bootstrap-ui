@@ -10,6 +10,7 @@ import redirect from '../../assets/images/redirect.png'
 
 import DataGrid from "../DataGrid-ReactTable/datagrid";
 import { columns, data } from "../Datagrid-Poc2/datagrid.stories";
+import * as Icon from 'react-bootstrap-icons';
 
 import './poc2.scss';
 
@@ -25,7 +26,8 @@ storiesOf("POC2", module)
                     </Badge>
                     </div>
                 </div>
-                <Button variant="outline-primary"><div className="icon-button">Grafana {'<Redirect icon to be inserted>'}</div></Button>
+                {/* <Button variant="outline-primary"><div className="icon-button">Grafana {'<Redirect icon to be inserted>'}</div></Button> */}
+                <Button variant="outline-primary"><span style={{paddingBottom: '4px', paddingRight: '3px'}}>Grafana  </span><Icon.BoxArrowUpRight style={{paddingBottom: '4px'}} color="#0076CE" size={20}/></Button>
             </div>
             <div className="circular-bar-container">
                 <Card style={{ width: '16rem', margin: '20px' }}>
@@ -85,7 +87,8 @@ storiesOf("POC2", module)
             <div className="datagrid-container">
                 <div className="button-container">
                     <Button>Add Node</Button>
-                    <Button variant="outline-primary">{'<Refresh Icon to be inserted>'}</Button>
+                    {/* <Button variant="outline-primary">{'<Refresh Icon to be inserted>'}</Button> */}
+                    <Button style={{padding : '0 5px', minWidth: '0px'}} variant="outline-primary"><Icon.ArrowRepeat  color="#0076CE" size={21}/></Button>
                 </div>
                 <DataGrid
                     data={data}
