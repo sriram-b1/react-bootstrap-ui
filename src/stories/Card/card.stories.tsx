@@ -23,7 +23,7 @@ storiesOf("POC2/Card", module)
     .add("Icon in Header", () => (
         <Card>
             <Card.Header>
-                <div className='icon'>
+                <div className='icon-card'>
                     <img src="https://cms-assets.tutsplus.com/cdn-cgi/image/width=850/uploads/users/523/posts/32694/final_image/tutorial-preview-large.png" alt="Tick" />
                 </div>
                 Card with Icon in Title
@@ -32,7 +32,7 @@ storiesOf("POC2/Card", module)
                 <Card.Title>Icon list</Card.Title>
                 <Card.Text>
                     <div className='icon-list'>
-                        <div className='icon'>
+                        <div className='icon-card'>
                             <img src="https://cms-assets.tutsplus.com/cdn-cgi/image/width=850/uploads/users/523/posts/32694/final_image/tutorial-preview-large.png" alt="Tick" />
                         </div>
                         Item 1
@@ -40,7 +40,7 @@ storiesOf("POC2/Card", module)
                 </Card.Text>
                 <Card.Text>
                     <div className='icon-list'>
-                        <div className='icon'>
+                        <div className='icon-card'>
                             <img src="https://cms-assets.tutsplus.com/cdn-cgi/image/width=850/uploads/users/523/posts/32694/final_image/tutorial-preview-large.png" alt="Tick" />
                         </div>
                         Item 2
@@ -48,7 +48,7 @@ storiesOf("POC2/Card", module)
                 </Card.Text>
                 <Card.Text>
                     <div className='icon-list'>
-                        <div className='icon'>
+                        <div className='icon-card'>
                             <img src="https://www.freeiconspng.com/thumbs/cross-png/red-cross-png-33.png" alt="Cross" />
                         </div>
                         Item 3
