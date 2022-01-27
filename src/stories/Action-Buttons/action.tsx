@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AreaChart, Area, ReferenceLine, Tooltip, XAxis } from "recharts";
-import { Badge, Button } from 'react-bootstrap';
+import { Badge, Button, Col, Row } from 'react-bootstrap';
 import { Dropdown, DropdownButton, Form, Spinner } from "react-bootstrap";
 import './action.scss'
 
@@ -44,12 +44,12 @@ const Action = (props: any) => {
                         <Button variant="light">...</Button>
                     </Dropdown.Toggle>
                     <Dropdown.Menu className="action-select-dots">
-                        <Button variant="light" >Standby</Button>
-                        <Button variant="light" >Shutdown</Button>
-                        <Button variant="light" >Reboot</Button>
-                        <Button variant="light" >Change Hostname</Button>
-                        <Button variant="light" >Identity</Button>
-                        <Button variant="light" >Upgrade 0.1.12</Button>
+                    <Row><Col className="d-grid"><Button variant="light" >Standby</Button></Col></Row>
+                    <Row><Col className="d-grid"><Button variant="light" >Shutdown</Button></Col></Row>
+                    <Row><Col className="d-grid"><Button variant="light" >Reboot</Button></Col></Row>
+                    <Row><Col className="d-grid"><Button variant="light" >Change Hostname</Button></Col></Row>
+                    <Row><Col className="d-grid"><Button variant="light" >Identity</Button></Col></Row>
+                    <Row><Col className="d-grid"><Button variant="light" >Upgrade 0.1.12</Button></Col></Row>
                     </Dropdown.Menu>
                 </Dropdown>
              </div> 

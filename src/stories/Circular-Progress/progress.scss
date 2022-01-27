@@ -1,24 +1,5 @@
 @import '../../App.scss';
 
-.progress-container {
-    position: relative;
-    background-color: red;
-    .legend {
-        position: absolute;
-        min-width: 100px;
-        min-height: 100px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        top: 40%;
-        left: 40%;
-        bottom: 40%;
-        background-color: blue;
-    }
-}
-
-
-// Custom Progress bar
 .circular-progress {
     display: block;
     margin: 20px auto;
@@ -37,10 +18,11 @@
     font-weight: bold;
     transform: rotate(90deg);
     text-anchor:middle;
+    font-family: $roboto-light;
 }
 
 .percent {
-    font-size: 50px;
+    font-size: 40px;
     font-weight: 400;
 }
 .detail {

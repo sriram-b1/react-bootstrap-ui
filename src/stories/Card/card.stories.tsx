@@ -84,7 +84,7 @@ storiesOf("POC2/Card", module)
                             ]} label="500 GiB" />
                         </Card.Body>
                     </Card>
-                    <Card style={{ width: '27rem', margin: '20px' }}>
+                    <Card style={{ width: '30rem', margin: '20px' }}>
                         <Card.Header>Disks</Card.Header>
                         <Card.Body>
                             <div className="table-container">
@@ -97,17 +97,17 @@ storiesOf("POC2/Card", module)
                                     <table>
                                         <tr>
                                             <td><div className='icon-sm'><img src={tick} alt="tick" /></div></td>
-                                            <td>Good</td>
+                                            <td width={100}>Good</td>
                                             <td><Button variant="light">4</Button></td>
                                         </tr>
                                         <tr>
                                             <td><div className="icon-sm"><img src={danger} alt="tick" /></div></td>
-                                            <td>Bad</td>
+                                            <td width={100}>Bad</td>
                                             <td><Button variant="light" disabled>0</Button></td>
                                         </tr>
                                         <tr>
                                             <td><div className="icon-sm"><img src={warning} alt="tick" /></div></td>
-                                            <td>Suspect</td>
+                                            <td width={100}>Suspect</td>
                                             <td><Button variant="light" disabled>0</Button></td>
                                         </tr>
                                     </table>
