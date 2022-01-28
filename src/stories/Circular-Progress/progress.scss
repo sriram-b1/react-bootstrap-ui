@@ -1,0 +1,31 @@
+@import '../../App.scss';
+
+.circular-progress {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    max-height: 250px;
+    transform: rotate(-90deg);
+}
+.circular-bg {
+    fill: none;
+}
+.circle {
+    fill: none;
+}
+.label {
+    fill: #333333;
+    font-weight: bold;
+    transform: rotate(90deg);
+    text-anchor:middle;
+    font-family: $roboto-light;
+}
+
+.percent {
+    font-size: 40px;
+    font-weight: 400;
+}
+.detail {
+    font-size: 20px;
+    font-weight: 400;
+}

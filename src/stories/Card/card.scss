@@ -1,0 +1,27 @@
+.icon-card {
+    max-width: 50px;
+    img {
+        width: 100%;
+    }
+}
+.icon-list {
+    display: flex;
+    align-items: center;
+}
+
+.card {
+    padding: unset;
+}
+
+.table-container {
+display: flex;
+align-items: center;
+justify-content: space-between;
+    .table {
+        width: unset;
+    }
+}
+
+.icon-sm {
+    max-width: 20px;
+}

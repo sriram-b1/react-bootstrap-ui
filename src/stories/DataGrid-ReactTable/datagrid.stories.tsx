@@ -16,7 +16,7 @@ const columns = [
 ];
 
 
-storiesOf("Data Grid - ReactTable", module)
+storiesOf("POC1/Data Grid - ReactTable", module)
     .add("POC", () => (
         <div>
             <DataGrid

@@ -1,0 +1,12 @@
+.blue-background {
+    background-color: #0076CE;
+}
+.white-background, .blue-background{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333333;
+    p {
+        margin: unset;
+    }
+}
