@@ -1,0 +1,43 @@
+@import '../App.scss';
+
+.rounded-pill {
+    height: 24px;
+    font-size: 12px;
+    font-weight: unset;
+    padding: 5px 8px;
+    text-align: center;
+    display: unset;
+}
+.bg-primary {
+    background-color: $blue-100 !important;
+    color: $gray-700;
+}
+.bg-secondary {
+    background-color: $gray-200 !important;
+    color: $gray-700;
+}
+.bg-light {
+    background-color: $white !important;
+    border: 1px solid $gray-400;
+    color: $gray-700 !important;
+}
+.bg-success {
+    background-color: $green-400 !important;
+    color: $white;
+}
+.bg-danger {
+    background-color: $red-700 !important;
+    color: $white;
+}
+.bg-warning {
+    background-color: $yellow-300 !important;
+    color: $gray-900 !important;
+}
+.bg-info {
+    background-color: $orange-400 !important;
+    color: $white;
+}
+
+.badge-pills {
+    color: $white !important;
+}

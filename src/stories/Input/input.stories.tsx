@@ -4,7 +4,7 @@ import {action} from "@storybook/addon-actions";
 import { Form } from "react-bootstrap";
 import '../../wrapper-styles/index.scss'
 
-storiesOf("Input", module)
+storiesOf("POC1/Input", module)
     .add("Normal Input", () => (
         <Form>
             <div style={{display: "flex", alignItems: "center"}}>

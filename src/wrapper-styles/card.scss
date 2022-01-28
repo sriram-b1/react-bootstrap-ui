@@ -1,0 +1,31 @@
+@import '../App.scss';
+.card{
+    border: 1px solid $gray-300;
+    color: $gray-900;
+    box-shadow: 0 0 5px $gray-300;
+    .card-header {
+        height: 72px;
+        display: flex;
+        align-items: center;
+        font-weight: 400;
+        font-size: 20px;
+        font-family: $roboto-medium;
+        line-height: 24px;
+        background-color: $white;
+        border-bottom: 1px solid $gray-300;
+        padding: 0 25px 0 25px;
+    }
+    .card-body {
+        padding: 24px;
+        .card-title {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+        }
+        .card-text {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+        }
+    }
+}
